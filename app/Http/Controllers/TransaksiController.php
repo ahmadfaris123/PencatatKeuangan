@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaksi;
+use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
@@ -23,11 +24,11 @@ class TransaksiController extends Controller
     public function show(Request $request)
     {
    
-        $hasil = DB::table('kategory')
-                ->where('code_kategory', $request->code_kategory)
-                ->get();
+        $where = array('id' => $request->id);
+        $hasil  = Transaksi::where($where)->first();
 
         return response()->json($hasil);
+
     }
 
     public function update(Request $request)
